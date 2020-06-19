@@ -21,6 +21,7 @@ class _HomeCardState extends State<HomeCard> {
   Widget build(BuildContext context) {
     return Center(
       child: Card(
+        margin: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0.0),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
