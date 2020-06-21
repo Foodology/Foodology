@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:foodology/home-card.dart';
+import 'package:foodology/home.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -8,7 +8,7 @@ void main() {
       appBar: AppBar(
         title: Text('Welcome to Flutter'),
       ),
-      body: HomeCard()
+      body: Home()
     ),
   ));
 }
