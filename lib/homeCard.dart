@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:foodology/homeCardActions.dart';
+import 'package:foodology/homeExpansionTile.dart';
 
 class HomeCard extends StatefulWidget {
   @override
@@ -67,22 +68,11 @@ class _HomeCardState extends State<HomeCard> {
                   },
                 ),
               ),
-            ),ExpansionTile(
-              title: Text(this.widget.summary),
-              trailing: Icon(Icons.more),
-              children: <Widget>[
-                Container(
-                  margin: EdgeInsets.fromLTRB(10.0, 5.0, 10.0, 10.0),
-                  child: Text(
-                    this.widget.detailedSummary,
-                    style: TextStyle(
-                      fontSize: 15.0,
-                      height: 1.5,
-                    ),
-                  ),
-                ),
-              ],
-            ),SizedBox(height: 10.0,),
+            ), HomeExpansionTile(
+              summary: this.widget.summary,
+              detailedSummary: this.widget.detailedSummary,
+            ),
+            SizedBox(height: 10.0,),
             HomeCardActions(),
             SizedBox(height: 10.0,),
           ],
