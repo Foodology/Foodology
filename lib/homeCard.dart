@@ -33,6 +33,7 @@ class _HomeCardState extends State<HomeCard> {
   Widget build(BuildContext context) {
     return Container(
       child: Card(
+        elevation: 10.0,
         margin: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0.0),
         child: Column(
           mainAxisSize: MainAxisSize.min,

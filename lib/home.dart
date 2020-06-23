@@ -21,31 +21,26 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: ListView(
-        padding: EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
-          children: <Widget>[
-            HomeCard(
-              title: "Ultimate Burger Recipe",
-              author: "Gordon Ramsay",
-              authorRating: "8.4 / 10.0",
-              recipeRating: "9.5 / 10.0",
-              authorImage: "https://cdn1.i-scmp.com/sites/default/files/styles/768x768/public/2014/09/18/ramsay-a.jpg?itok=eFz31vqq",
-              links: links,
-              summary: "This is a recipe called Ultimate Burger Recipe by Gordon Ramsay",
-              detailedSummary: "Gordon Ramsay knows the kind of magic every burger needs. \"The secret is in the blend,\" Ramsay says. The celebrity chef, popular for his harsh criticism on shows like \"Hell's Kitchen\" and \"MasterChef,\" invited \"GMA\" into his Calabasas, California, mansion to show viewers how to put together the perfect burger. Ramsay calls his favorite burger the \"F-word,\" and he serves it at his burger restaurant inside Planet Hollywood in Las Vegas.",
+      child: ListView.builder(
+        padding: EdgeInsets.fromLTRB(0.0, 20.0, 0.0, 20.0),
+        itemCount: 1000,
+        itemBuilder: (BuildContext context, int index) {
+          return Padding(
+            padding: const EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 15.0),
+            child: (
+                HomeCard(
+                  title: "Ultimate Burger Recipe",
+                  author: "Gordon Ramsay",
+                  authorRating: "8.4 / 10.0",
+                  recipeRating: "9.5 / 10.0",
+                  authorImage: "https://cdn1.i-scmp.com/sites/default/files/styles/768x768/public/2014/09/18/ramsay-a.jpg?itok=eFz31vqq",
+                  links: links,
+                  summary: "This is a recipe called Ultimate Burger Recipe by Gordon Ramsay",
+                  detailedSummary: "Gordon Ramsay knows the kind of magic every burger needs. \"The secret is in the blend,\" Ramsay says. The celebrity chef, popular for his harsh criticism on shows like \"Hell's Kitchen\" and \"MasterChef,\" invited \"GMA\" into his Calabasas, California, mansion to show viewers how to put together the perfect burger. Ramsay calls his favorite burger the \"F-word,\" and he serves it at his burger restaurant inside Planet Hollywood in Las Vegas.",
+                )
             ),
-            SizedBox(height: 20.0,),
-            HomeCard(
-              title: "Ultimate Burger Recipe",
-              author: "Gordon Ramsay",
-              authorRating: "8.4 / 10.0",
-              recipeRating: "9.5 / 10.0",
-              authorImage: "https://cdn1.i-scmp.com/sites/default/files/styles/768x768/public/2014/09/18/ramsay-a.jpg?itok=eFz31vqq",
-              links: links,
-              summary: "This is a recipe called Ultimate Burger Recipe by Gordon Ramsay",
-              detailedSummary: "Gordon Ramsay knows the kind of magic every burger needs. \"The secret is in the blend,\" Ramsay says. The celebrity chef, popular for his harsh criticism on shows like \"Hell's Kitchen\" and \"MasterChef,\" invited \"GMA\" into his Calabasas, California, mansion to show viewers how to put together the perfect burger. Ramsay calls his favorite burger the \"F-word,\" and he serves it at his burger restaurant inside Planet Hollywood in Las Vegas.",
-            ),
-          ]
+          );
+        },
       ),
     );
   }
