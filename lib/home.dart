@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:foodology/homeCard.dart';
+import 'package:foodology/services/database.dart';
 
 class Home extends StatefulWidget {
   Home({Key key}) : super(key: key);
@@ -20,6 +21,9 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+
+    DatabaseService().getRecipe();
+
     return Center(
       child: ListView.builder(
         padding: EdgeInsets.fromLTRB(0.0, 20.0, 0.0, 20.0),

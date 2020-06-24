@@ -1,0 +1,56 @@
+{
+  "project_info": {
+    "project_number": "406881284457",
+    "firebase_url": "https://foodology-40050.firebaseio.com",
+    "project_id": "foodology-40050",
+    "storage_bucket": "foodology-40050.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:406881284457:android:75a4f554be41ef137e8df8",
+        "android_client_info": {
+          "package_name": "com.foodology.foodology"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "406881284457-2gh5lpqf1lor7q72u6djsuvehpv8q9kl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.foodology.foodology",
+            "certificate_hash": "ccd21f644445ca383868c9e8ed55330c45a4fdcd"
+          }
+        },
+        {
+          "client_id": "406881284457-s2k81lije0o9ahfmdmkc3gisgfvkc8ho.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.foodology.foodology",
+            "certificate_hash": "bc09286ccb0b1e9d54d457472328a9d57b6d1e58"
+          }
+        },
+        {
+          "client_id": "406881284457-lje429g5mar9peustp1459i1n9ke75bq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCtdLXMScykryOafQEc7lOufTidgiuJR5M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "406881284457-lje429g5mar9peustp1459i1n9ke75bq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
