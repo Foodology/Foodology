@@ -1,7 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:foodology/homeCard.dart';
 import 'package:foodology/models/recipe.dart';
-import 'package:foodology/services/database.dart';
 
 class Home extends StatefulWidget {
   Home({Key key}) : super(key: key);
@@ -22,15 +22,16 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<Recipe>(
-      stream: DatabaseService().getRecipe(),
-      builder: (BuildContext c, AsyncSnapshot<Recipe> data) {
+    return StreamBuilder(
+      stream: Firestore.instance.collection('Recipes').snapshots(),
+      builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> data) {
         if (data?.data == null) return CircularProgressIndicator();
-        Recipe r = data.data;
         return Center(
           child: ListView.builder(
             padding: EdgeInsets.fromLTRB(0.0, 20.0, 0.0, 20.0),
+            itemCount: data.data.documents.length,
             itemBuilder: (BuildContext context, int index) {
+              Recipe r = Recipe.fromSnapshot(data.data.documents[index]);
               return Padding(
                 padding: const EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 15.0),
                 child: (
