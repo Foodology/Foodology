@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:foodology/home.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(MaterialApp(

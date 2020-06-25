@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:foodology/homeCard.dart';
+import 'package:foodology/models/recipe.dart';
 import 'package:foodology/services/database.dart';
 
 class Home extends StatefulWidget {
@@ -21,31 +22,34 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-
-    DatabaseService().getRecipe();
-
-    return Center(
-      child: ListView.builder(
-        padding: EdgeInsets.fromLTRB(0.0, 20.0, 0.0, 20.0),
-        itemCount: 1000,
-        itemBuilder: (BuildContext context, int index) {
-          return Padding(
-            padding: const EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 15.0),
-            child: (
-                HomeCard(
-                  title: "Ultimate Burger Recipe",
-                  author: "Gordon Ramsay",
-                  authorRating: "8.4 / 10.0",
-                  recipeRating: "9.5 / 10.0",
-                  authorImage: "https://cdn1.i-scmp.com/sites/default/files/styles/768x768/public/2014/09/18/ramsay-a.jpg?itok=eFz31vqq",
-                  links: links,
-                  summary: "This is a recipe called Ultimate Burger Recipe by Gordon Ramsay",
-                  detailedSummary: "Gordon Ramsay knows the kind of magic every burger needs. \"The secret is in the blend,\" Ramsay says. The celebrity chef, popular for his harsh criticism on shows like \"Hell's Kitchen\" and \"MasterChef,\" invited \"GMA\" into his Calabasas, California, mansion to show viewers how to put together the perfect burger. Ramsay calls his favorite burger the \"F-word,\" and he serves it at his burger restaurant inside Planet Hollywood in Las Vegas.",
-                )
-            ),
-          );
-        },
-      ),
+    return StreamBuilder<Recipe>(
+      stream: DatabaseService().getRecipe(),
+      builder: (BuildContext c, AsyncSnapshot<Recipe> data) {
+        if (data?.data == null) return CircularProgressIndicator();
+        Recipe r = data.data;
+        return Center(
+          child: ListView.builder(
+            padding: EdgeInsets.fromLTRB(0.0, 20.0, 0.0, 20.0),
+            itemBuilder: (BuildContext context, int index) {
+              return Padding(
+                padding: const EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 15.0),
+                child: (
+                    HomeCard(
+                      title: r.data.title,
+                      author: r.data.author,
+                      authorRating: r.data.authorRating.toString() + " / 10.0",
+                      recipeRating: r.data.recipeRating.toString() + " / 10.0",
+                      authorImage: "https://cdn1.i-scmp.com/sites/default/files/styles/768x768/public/2014/09/18/ramsay-a.jpg?itok=eFz31vqq",
+                      links: links,
+                      summary: r.data.summary,
+                      detailedSummary: r.data.detailedSummary,
+                    )
+                ),
+              );
+            },
+          ),
+        );
+      }
     );
   }
 }
