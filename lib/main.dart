@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:foodology/home.dart';
-import 'package:provider/provider.dart';
+import 'package:foodology/Home.dart';
 
 void main() {
   runApp(MaterialApp(
-    title: 'Welcome to Flutter',
+    title: 'Foodology',
     home: Scaffold(
       appBar: AppBar(
-        title: Text('Welcome to Flutter'),
+        title: Text('Foodology'),
       ),
       body: Home()
     ),

@@ -1,12 +1,9 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-
 class Recipe {
   final String id;
   final RecipeData data;
 
-  Recipe.fromSnapshot(DocumentSnapshot snapshot)
-      : id = snapshot.documentID,
-        data = RecipeData.fromMap(snapshot.data);
+  Recipe({this.id,
+    this.data});
 }
 
 class RecipeData {
@@ -17,11 +14,11 @@ class RecipeData {
   final double recipeRating;
   final String summary;
 
-  RecipeData.fromMap(Map<dynamic, dynamic> data)
-      : author = data['author'],
-        title = data['title'],
-        authorRating = data['authorRating'],
-        detailedSummary = data['detailedSummary'],
-        recipeRating = data['recipeRating'],
-        summary = data['summary'];
+  RecipeData({
+    this.author,
+    this.title,
+    this.authorRating,
+    this.detailedSummary,
+    this.recipeRating,
+    this.summary});
 }
