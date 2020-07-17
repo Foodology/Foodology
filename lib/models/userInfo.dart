@@ -22,14 +22,16 @@ class UserData{
 class PrivateInfo{
   String email;
   List<String> friends;
+  Map<String, String> recommendedRecipes;
 
-  PrivateInfo({this.email, this.friends});
+  PrivateInfo({this.email, this.friends, this.recommendedRecipes});
 
   factory PrivateInfo.fromFirestore(DocumentSnapshot doc){
     Map data = doc.data ?? { };
     return PrivateInfo(
       email: data['email'] ?? '',
       friends: List.from(data['friends']) ?? [],
+      recommendedRecipes: Map.from(data['recommendedRecipes'])  ?? Map()
     );
   }
 }

@@ -31,8 +31,8 @@ class _CreateHomeCardsState extends State<CreateHomeCards> {
         stream: DatabaseService().userData(),
         builder: (context, snap) {
           if(snap.data == null) return CircularProgressIndicator();
-          print(snap.data.private.toString());
-          return Text(snap.data.public.name);
+          print(snap.data.private.recommendedRecipes);
+          return Text(snap.data.private.email);
         },
       )
     );
