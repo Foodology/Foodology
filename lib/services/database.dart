@@ -1,6 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
-import 'package:foodology/models/recipe.dart';
 import 'package:foodology/models/userInfo.dart';
 
 class DatabaseService {
@@ -13,40 +11,32 @@ class DatabaseService {
     return _singleton;
   }
 
-  // Brew list from snapshot
-  List<Recipe> _recipesFromSnapshot(QuerySnapshot snapshot) {
-    return snapshot.documents.map((doc){
-      return Recipe(
-        id: doc.documentID,
-          data: RecipeData(
-            title: doc.data['title'] ?? '',
-            author: doc.data['author'] ?? '',
-            authorRating: doc.data['authorRating'] ?? '',
-            recipeRating: doc.data['recipeRating'] ?? '',
-            summary: doc.data['summary'] ?? '',
-            detailedSummary: doc.data['detailedSummary'] ?? ''
-          ),
-      );
-    }).toList();
-  }
-
-  Stream<List<Recipe>> get recipes {
+  Stream<PublicInfo> publicUserInfo() {
     return Firestore.instance
-        .collection('Recipes')
-        .document('FIA1d66UO7O4puwb1Zhia1q4nFh1')
-        .collection('topRecipes').snapshots().map(_recipesFromSnapshot);
+        .collection('Users')
+        .document('1weHFMrmWtV2UtFY7za11ODbyb13')
+        .collection('Info')
+        .document('Public')
+        .snapshots()
+        .map((snap) => PublicInfo.fromFirestore(snap));
   }
 
-  Stream<UserInfo> get userInfo {
-    return Firestore.instance.collection('Users')
-        .document('FIA1d66UO7O4puwb1Zhia1q4nFh1').get().then((value) {
-          return UserInfo(
-              authorRating: value["authorRating"],
-              email: value['email'],
-              friends: value['friends'],
-              name: value['name'],
-              profilePicture: value['profilePicture']
-          );
-    }).asStream();
+  Stream<PrivateInfo> privateUserInfo() {
+    return Firestore.instance
+        .collection('Users')
+        .document('1weHFMrmWtV2UtFY7za11ODbyb13')
+        .collection('Info')
+        .document('Private')
+        .snapshots()
+        .map((snap) => PrivateInfo.fromFirestore(snap));
+  }
+
+  Stream<UserData> userData() {
+    return Firestore.instance
+        .collection('Users')
+        .document('FIA1d66UO7O4puwb1Zhia1q4nFh1')
+        .collection('Info')
+        .snapshots()
+        .map((event) => UserData.fromFirestore(event));
   }
 }

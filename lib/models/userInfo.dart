@@ -1,9 +1,52 @@
-class UserInfo{
-  final int authorRating;
-  final String email;
-  final List<dynamic> friends;
-  final String name;
-  final String profilePicture;
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-  UserInfo({this.authorRating, this.email, this.friends, this.name, this.profilePicture });
+class UserData{
+  PrivateInfo private;
+  PublicInfo public;
+
+  UserData({this.public, this.private});
+
+  factory UserData.fromFirestore(QuerySnapshot snapshot){
+    UserData info = UserData();
+    snapshot.documents.forEach((element) {
+      if(element.documentID == "Public"){
+        info.public = PublicInfo.fromFirestore(element);
+      } else {
+        info.private = PrivateInfo.fromFirestore(element);
+      }
+    });
+    return info;
+  }
+}
+
+class PrivateInfo{
+  String email;
+  List<String> friends;
+
+  PrivateInfo({this.email, this.friends});
+
+  factory PrivateInfo.fromFirestore(DocumentSnapshot doc){
+    Map data = doc.data ?? { };
+    return PrivateInfo(
+      email: data['email'] ?? '',
+      friends: List.from(data['friends']) ?? [],
+    );
+  }
+}
+
+class PublicInfo{
+  String name;
+  double authorRating;
+  String profilePicture;
+
+  PublicInfo({this.name, this.authorRating, this.profilePicture});
+
+  factory PublicInfo.fromFirestore(DocumentSnapshot doc) {
+    Map data = doc.data ?? { };
+    return PublicInfo(
+      name: data['name'] ?? '',
+      authorRating: data['authorRating'] ?? 0.0,
+      profilePicture: data['profilePicture'] ?? '',
+    );
+  }
 }

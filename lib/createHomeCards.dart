@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:foodology/homeCard.dart';
 import 'package:foodology/models/recipe.dart';
@@ -24,32 +26,40 @@ class _CreateHomeCardsState extends State<CreateHomeCards> {
 
   @override
   Widget build(BuildContext context) {
-
-    final rs = Provider.of<List<Recipe>>(context) ?? [];
-
     return Center(
-      child: ListView.builder(
-        padding: EdgeInsets.fromLTRB(0.0, 20.0, 0.0, 20.0),
-        itemCount: rs.length,
-        itemBuilder: (BuildContext context, int index) {
-          Recipe r = rs[index];
-          return Padding(
-            padding: const EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 15.0),
-            child: (
-                HomeCard(
-                  title: r.data.title,
-                  author: r.data.author,
-                  authorRating: r.data.authorRating.toString() + " / 10.0",
-                  recipeRating: r.data.recipeRating.toString() + " / 10.0",
-                  authorImage: "https://cdn1.i-scmp.com/sites/default/files/styles/768x768/public/2014/09/18/ramsay-a.jpg?itok=eFz31vqq",
-                  links: links,
-                  summary: r.data.summary,
-                  detailedSummary: r.data.detailedSummary,
-                )
-            ),
-          );
+      child: StreamBuilder<UserData>(
+        stream: DatabaseService().userData(),
+        builder: (context, snap) {
+          if(snap.data == null) return CircularProgressIndicator();
+          print(snap.data.private.toString());
+          return Text(snap.data.public.name);
         },
-      ),
+      )
     );
   }
+
+//    return Center(
+//      child: ListView.builder(
+//        padding: EdgeInsets.fromLTRB(0.0, 20.0, 0.0, 20.0),
+//        itemCount: rs.length,
+//        itemBuilder: (BuildContext context, int index) {
+//          Recipe r = rs[index];
+//          return Padding(
+//            padding: const EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 15.0),
+//            child: (
+//                HomeCard(
+//                  title: r.data.title,
+//                  author: r.data.author,
+//                  authorRating: r.data.authorRating.toString() + " / 10.0",
+//                  recipeRating: r.data.recipeRating.toString() + " / 10.0",
+//                  authorImage: "https://cdn1.i-scmp.com/sites/default/files/styles/768x768/public/2014/09/18/ramsay-a.jpg?itok=eFz31vqq",
+//                  links: links,
+//                  summary: r.data.summary,
+//                  detailedSummary: r.data.detailedSummary,
+//                )
+//            ),
+//          );
+//        },
+//      ),
+//    );
 }
