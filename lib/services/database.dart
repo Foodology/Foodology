@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:foodology/models/recipe.dart';
+import 'package:foodology/models/userInfo.dart';
 
 class DatabaseService {
 
@@ -36,10 +37,16 @@ class DatabaseService {
         .collection('topRecipes').snapshots().map(_recipesFromSnapshot);
   }
 
-  Stream getRecipes() {
-    return Firestore.instance
-        .collection('Recipes')
-        .document('FIA1d66UO7O4puwb1Zhia1q4nFh1')
-        .collection('topRecipes').snapshots().map(_recipesFromSnapshot);
+  Stream<UserInfo> get userInfo {
+    return Firestore.instance.collection('Users')
+        .document('FIA1d66UO7O4puwb1Zhia1q4nFh1').get().then((value) {
+          return UserInfo(
+              authorRating: value["authorRating"],
+              email: value['email'],
+              friends: value['friends'],
+              name: value['name'],
+              profilePicture: value['profilePicture']
+          );
+    }).asStream();
   }
 }

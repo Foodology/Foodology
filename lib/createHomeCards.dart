@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:foodology/homeCard.dart';
 import 'package:foodology/models/recipe.dart';
+import 'package:foodology/models/userInfo.dart';
+import 'package:foodology/services/database.dart';
 import 'package:provider/provider.dart';
 
 class CreateHomeCards extends StatefulWidget {
