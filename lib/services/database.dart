@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:foodology/models/userInfo.dart';
+import 'package:foodology/models/userData.dart';
+import 'package:foodology/models/recipe.dart';
 
 class DatabaseService {
 
@@ -11,24 +12,14 @@ class DatabaseService {
     return _singleton;
   }
 
-  Stream<PublicInfo> publicUserInfo() {
+  Stream<PublicInfo> publicUserInfo(String key) {
     return Firestore.instance
         .collection('Users')
-        .document('1weHFMrmWtV2UtFY7za11ODbyb13')
+        .document(key)
         .collection('Info')
         .document('Public')
         .snapshots()
         .map((snap) => PublicInfo.fromFirestore(snap));
-  }
-
-  Stream<PrivateInfo> privateUserInfo() {
-    return Firestore.instance
-        .collection('Users')
-        .document('1weHFMrmWtV2UtFY7za11ODbyb13')
-        .collection('Info')
-        .document('Private')
-        .snapshots()
-        .map((snap) => PrivateInfo.fromFirestore(snap));
   }
 
   Stream<UserData> userData() {
@@ -38,5 +29,9 @@ class DatabaseService {
         .collection('Info')
         .snapshots()
         .map((event) => UserData.fromFirestore(event));
+  }
+
+  Stream<Recipe> recipe(DocumentReference doc){
+    return doc.snapshots().map((event) => Recipe.fromFirestore(event));
   }
 }

@@ -22,7 +22,7 @@ class UserData{
 class PrivateInfo{
   String email;
   List<String> friends;
-  Map<String, String> recommendedRecipes;
+  Map<String, dynamic> recommendedRecipes;
 
   PrivateInfo({this.email, this.friends, this.recommendedRecipes});
 

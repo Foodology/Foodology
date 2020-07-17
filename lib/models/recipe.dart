@@ -1,24 +1,22 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class Recipe {
-  final String id;
-  final RecipeData data;
+  String detailedSummary;
+  List<String> images;
+  double recipeRating;
+  String summary;
+  String title;
 
-  Recipe({this.id,
-    this.data});
-}
+  Recipe({this.detailedSummary, this.images, this.recipeRating, this.summary, this.title});
 
-class RecipeData {
-  final String author;
-  final String title;
-  final double authorRating;
-  final String detailedSummary;
-  final double recipeRating;
-  final String summary;
-
-  RecipeData({
-    this.author,
-    this.title,
-    this.authorRating,
-    this.detailedSummary,
-    this.recipeRating,
-    this.summary});
+  factory Recipe.fromFirestore(DocumentSnapshot doc){
+    Map data = doc.data ?? {};
+    return Recipe(
+      detailedSummary: data['detailedSummary'] ?? '',
+      images: List.from(data['images']) ?? [],
+      recipeRating: data['recipeRating'] ?? 0.0,
+      summary: data['summary'] ?? '',
+      title: data['title'] ?? '',
+    );
+  }
 }
