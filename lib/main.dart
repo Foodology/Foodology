@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:foodology/screens/AccountPage.dart';
-import 'package:foodology/screens/AddRecipesPage.dart';
-import 'package:foodology/screens/Home.dart';
-import 'package:foodology/screens/MessagesPage.dart';
-import 'package:foodology/screens/SearchPage.dart';
+import 'package:foodology/screens/accountPage.dart';
+import 'package:foodology/screens/addRecipesPage.dart';
+import 'package:foodology/screens/homePage.dart';
+import 'package:foodology/screens/messagesPage.dart';
+import 'package:foodology/screens/searchPage.dart';
 
 void main() {
   runApp(HomePage());
@@ -18,11 +18,11 @@ class _HomePageState extends State<HomePage> {
 
   int _selectedPage = 0;
   final pageOptions = [
-    Home(),
-    SearchPage(),
-    AddRecipesPage(),
-    MessagesPage(),
-    AccountPage(),
+    homePage(),
+    searchPage(),
+    addRecipesPage(),
+    messagesPage(),
+    accountPage(),
   ];
 
   @override
@@ -33,7 +33,7 @@ class _HomePageState extends State<HomePage> {
         primarySwatch: Colors.blue,
       ),
       home: Scaffold(
-          appBar: AppBar(title: Text("Bottom Nav")),
+          appBar: AppBar(title: Text("Foodology")),
           body: pageOptions[_selectedPage],
           bottomNavigationBar: BottomNavigationBar(
             type: BottomNavigationBarType.fixed,
