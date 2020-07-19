@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class messagesPage extends StatefulWidget {
+class MessagesPage extends StatefulWidget {
   @override
-  _messagesPageState createState() => _messagesPageState();
+  _MessagesPageState createState() => _MessagesPageState();
 }
 
-class _messagesPageState extends State<messagesPage> {
+class _MessagesPageState extends State<MessagesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -18,11 +18,11 @@ class _HomePageState extends State<HomePage> {
 
   int _selectedPage = 0;
   final pageOptions = [
-    homePage(),
-    searchPage(),
-    addRecipesPage(),
-    messagesPage(),
-    accountPage(),
+    HomePage(),
+    SearchPage(),
+    AddRecipesPage(),
+    MessagesPage(),
+    AccountPage(),
   ];
 
   @override
