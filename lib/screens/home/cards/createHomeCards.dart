@@ -54,6 +54,8 @@ class _CreateHomeCardsState extends State<CreateHomeCards> {
                                       links: recipeDataSnap.data.images,
                                       summary: recipeDataSnap.data.summary,
                                       detailedSummary: recipeDataSnap.data.detailedSummary,
+                                      likes: recipeDataSnap.data.likes,
+                                      dislikes: recipeDataSnap.data.dislikes,
                                     )
                                 ),);
                             },

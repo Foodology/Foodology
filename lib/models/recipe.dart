@@ -7,8 +7,10 @@ class Recipe {
   double recipeRating;
   String summary;
   String title;
+  int likes;
+  int dislikes;
 
-  Recipe({this.detailedSummary, this.images, this.recipeRating, this.summary, this.title});
+  Recipe({this.detailedSummary, this.images, this.recipeRating, this.summary, this.title, this.likes, this.dislikes});
 
   // Updates the fields of Recipe with a document snapshot from firebase
   factory Recipe.fromFirestore(DocumentSnapshot doc){
@@ -19,6 +21,8 @@ class Recipe {
       recipeRating: data['recipeRating'] ?? 0.0,
       summary: data['summary'] ?? '',
       title: data['title'] ?? '',
+      likes: data['likes'] ?? 0,
+      dislikes: data['dislikes'] ?? 0,
     );
   }
 }

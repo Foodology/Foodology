@@ -14,6 +14,8 @@ class HomeCard extends StatefulWidget {
   final List<String> links;
   final String summary;
   final String detailedSummary;
+  final int likes;
+  final int dislikes;
 
   HomeCard({
     this.author,
@@ -23,7 +25,9 @@ class HomeCard extends StatefulWidget {
     this.authorImage,
     this.links,
     this.summary,
-    this.detailedSummary
+    this.detailedSummary,
+    this.likes,
+    this.dislikes
   });
 }
 
@@ -74,7 +78,10 @@ class _HomeCardState extends State<HomeCard> {
               detailedSummary: this.widget.detailedSummary,
             ),
             SizedBox(height: 10.0,),
-            HomeCardActions(),
+            HomeCardActions(
+              likes: this.widget.likes,
+              dislikes: this.widget.dislikes,
+            ),
             SizedBox(height: 10.0,),
           ],
         ),

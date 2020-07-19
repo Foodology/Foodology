@@ -4,6 +4,14 @@ import 'file:///C:/Users/nnibr/Coding/foodology/foodology/lib/screens/home/cards
 class HomeCardActions extends StatefulWidget {
   @override
   _HomeCardActionsState createState() => _HomeCardActionsState();
+
+  final int likes;
+  final int dislikes;
+
+  HomeCardActions({
+    this.likes,
+    this.dislikes
+  });
 }
 
 class _HomeCardActionsState extends State<HomeCardActions> {
@@ -27,9 +35,10 @@ class _HomeCardActionsState extends State<HomeCardActions> {
                     favoriteIcon == favoriteSelected ? favoriteIcon = favoriteUnselected : favoriteIcon = favoriteSelected;
                   });
                 },
-                ),Padding(
+                ),
+                Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Text("Like"),
+                  child: Text(this.widget.likes.toString()),
                 )
               ],
             ),
