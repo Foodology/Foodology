@@ -28,7 +28,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: "BottomNav",
+      title: "Foodology",
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
