@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:foodology/screens/accountPage.dart';
 import 'package:foodology/screens/addRecipesPage.dart';
-import 'file:///C:/Users/nnibr/Coding/foodology/foodology/lib/screens/home/homePage.dart';
+import 'package:foodology/screens/home/homePage.dart';
 import 'package:foodology/screens/messagesPage.dart';
 import 'package:foodology/screens/searchPage.dart';
 
