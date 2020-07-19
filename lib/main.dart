@@ -6,15 +6,15 @@ import 'package:foodology/screens/messagesPage.dart';
 import 'package:foodology/screens/searchPage.dart';
 
 void main() {
-  runApp(HomePage());
+  runApp(MainPage());
 }
 
-class HomePage extends StatefulWidget {
+class MainPage extends StatefulWidget {
   @override
-  _HomePageState createState() => _HomePageState();
+  _MainPageState createState() => _MainPageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _MainPageState extends State<MainPage> {
 
   int _selectedPage = 0;
   final pageOptions = [
