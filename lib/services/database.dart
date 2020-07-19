@@ -12,6 +12,7 @@ class DatabaseService {
     return _singleton;
   }
 
+  // Gets public info of any user
   Stream<PublicInfo> publicUserInfo(String key) {
     return Firestore.instance
         .collection('Users')
@@ -22,6 +23,7 @@ class DatabaseService {
         .map((snap) => PublicInfo.fromFirestore(snap));
   }
 
+  // Gets the user data of the user
   Stream<UserData> userData() {
     return Firestore.instance
         .collection('Users')
@@ -31,6 +33,7 @@ class DatabaseService {
         .map((event) => UserData.fromFirestore(event));
   }
 
+  // Gets the recipes
   Stream<Recipe> recipe(DocumentReference doc){
     return doc.snapshots().map((event) => Recipe.fromFirestore(event));
   }

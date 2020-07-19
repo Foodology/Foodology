@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:foodology/homeCardActions.dart';
-import 'package:foodology/homeExpansionTile.dart';
+import 'package:foodology/screens/home/cards/homeCardActions.dart';
+import 'package:foodology/screens/home/cards/homeExpansionTile.dart';
 
 class HomeCard extends StatefulWidget {
   @override

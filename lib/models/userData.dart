@@ -1,11 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+// Updates the user info of the current user
 class UserData{
   PrivateInfo private;
   PublicInfo public;
 
   UserData({this.public, this.private});
 
+  // Gets both the public and private data and stores them for use
   factory UserData.fromFirestore(QuerySnapshot snapshot){
     UserData info = UserData();
     snapshot.documents.forEach((element) {
@@ -19,6 +21,7 @@ class UserData{
   }
 }
 
+// Gets the private data of the current user and stores it for use
 class PrivateInfo{
   String email;
   List<String> friends;
@@ -26,6 +29,7 @@ class PrivateInfo{
 
   PrivateInfo({this.email, this.friends, this.recommendedRecipes});
 
+  // Get data from the snapshot
   factory PrivateInfo.fromFirestore(DocumentSnapshot doc){
     Map data = doc.data ?? { };
     return PrivateInfo(
@@ -36,6 +40,7 @@ class PrivateInfo{
   }
 }
 
+// Gets the public data of the current user and stores it for use
 class PublicInfo{
   String name;
   double authorRating;
@@ -43,6 +48,7 @@ class PublicInfo{
 
   PublicInfo({this.name, this.authorRating, this.profilePicture});
 
+  // Get data from the snapshot
   factory PublicInfo.fromFirestore(DocumentSnapshot doc) {
     Map data = doc.data ?? { };
     return PublicInfo(

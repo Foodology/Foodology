@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:foodology/screens/accountPage.dart';
 import 'package:foodology/screens/addRecipesPage.dart';
-import 'package:foodology/screens/homePage.dart';
+import 'file:///C:/Users/nnibr/Coding/foodology/foodology/lib/screens/home/homePage.dart';
 import 'package:foodology/screens/messagesPage.dart';
 import 'package:foodology/screens/searchPage.dart';
 
@@ -33,39 +33,42 @@ class _MainPageState extends State<MainPage> {
         primarySwatch: Colors.blue,
       ),
       home: Scaffold(
-          appBar: AppBar(title: Text("Foodology")),
-          body: pageOptions[_selectedPage],
-          bottomNavigationBar: BottomNavigationBar(
-            type: BottomNavigationBarType.fixed,
-            currentIndex: _selectedPage,
-            onTap: (int index) {
-              setState(() {
-                _selectedPage = index;
-              });
-            },
-            items: [
-              BottomNavigationBarItem(
+        body: IndexedStack(
+          index: _selectedPage,
+          children: pageOptions,
+        ),
+        appBar: AppBar(title: Text("Foodology")),
+        bottomNavigationBar: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          currentIndex: _selectedPage,
+          onTap: (int index) {
+            setState(() {
+              _selectedPage = index;
+            });
+          },
+          items: [
+            BottomNavigationBarItem(
                 icon: Icon(Icons.home),
                 title: Text("Home")
-              ),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.search),
-                  title: Text("Search")
-              ),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.add),
-                  title: Text("Add Recipes")
-              ),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.message),
-                  title: Text("Messages")
-              ),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.account_circle),
-                  title: Text("Account")
-              )
-            ],
-          ),
+            ),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.search),
+                title: Text("Search")
+            ),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.add),
+                title: Text("Add Recipes")
+            ),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.message),
+                title: Text("Messages")
+            ),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.account_circle),
+                title: Text("Account")
+            )
+          ],
+        ),
       ),
     );
   }

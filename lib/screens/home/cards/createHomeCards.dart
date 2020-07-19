@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:foodology/homeCard.dart';
 import 'package:foodology/models/recipe.dart';
 import 'package:foodology/models/userData.dart';
+import 'package:foodology/screens/home/cards/homeCard.dart';
 import 'package:foodology/services/database.dart';
 
 class CreateHomeCards extends StatefulWidget {
@@ -18,10 +18,10 @@ class _CreateHomeCardsState extends State<CreateHomeCards> {
         physics: ScrollPhysics(),
         child: StreamBuilder<UserData>(
           stream: DatabaseService().userData(),
-          builder: (context, snap) {
-            if(snap.data == null) return CircularProgressIndicator();
-            var count = snap.data.private.recommendedRecipes.length;
-            Map<String, dynamic> map = snap.data.private.recommendedRecipes;
+          builder: (context, userDataSnap) {
+            if(userDataSnap.data == null) return CircularProgressIndicator();
+            var count = userDataSnap.data.private.recommendedRecipes.length;
+            Map<String, dynamic> map = userDataSnap.data.private.recommendedRecipes;
             return ListView.builder(
               shrinkWrap: true,
               itemCount: count,
@@ -33,27 +33,27 @@ class _CreateHomeCardsState extends State<CreateHomeCards> {
                     itemCount: countList,
                     shrinkWrap: true,
                     physics: NeverScrollableScrollPhysics(),
-                    itemBuilder: (BuildContext context, int i) {
+                    itemBuilder: (BuildContext context, int recipeIndex) {
                       return StreamBuilder(
-                        stream: DatabaseService().recipe(map[key][i]),
-                        builder: (context, AsyncSnapshot<Recipe> snap2) {
-                          if(snap2.data == null) return CircularProgressIndicator();
+                        stream: DatabaseService().recipe(map[key][recipeIndex]),
+                        builder: (context, AsyncSnapshot<Recipe> recipeDataSnap) {
+                          if(recipeDataSnap.data == null) return CircularProgressIndicator();
                           return StreamBuilder(
                             stream: DatabaseService().publicUserInfo(key),
-                            builder: (context, AsyncSnapshot<PublicInfo> snap3) {
-                              if(snap3.data == null) return CircularProgressIndicator();
+                            builder: (context, AsyncSnapshot<PublicInfo> publicInfoSnap) {
+                              if(publicInfoSnap.data == null) return CircularProgressIndicator();
                               return Padding(
                                 padding: const EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 15.0),
                                 child: (
                                     HomeCard(
-                                      title: snap2.data.title,
-                                      author: snap3.data.name,
-                                      authorRating: snap3.data.authorRating.toString() + " / 10.0",
-                                      recipeRating: snap2.data.recipeRating.toString() + " / 10.0",
-                                      authorImage: snap3.data.profilePicture,
-                                      links: snap2.data.images,
-                                      summary: snap2.data.summary,
-                                      detailedSummary: snap2.data.detailedSummary,
+                                      title: recipeDataSnap.data.title,
+                                      author: publicInfoSnap.data.name,
+                                      authorRating: publicInfoSnap.data.authorRating.toString() + " / 10.0",
+                                      recipeRating: recipeDataSnap.data.recipeRating.toString() + " / 10.0",
+                                      authorImage: publicInfoSnap.data.profilePicture,
+                                      links: recipeDataSnap.data.images,
+                                      summary: recipeDataSnap.data.summary,
+                                      detailedSummary: recipeDataSnap.data.detailedSummary,
                                     )
                                 ),);
                             },

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:foodology/commentPage.dart';
+import 'file:///C:/Users/nnibr/Coding/foodology/foodology/lib/screens/home/cards/comments/commentPage.dart';
 
 class HomeCardActions extends StatefulWidget {
   @override
