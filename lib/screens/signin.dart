@@ -17,145 +17,169 @@ class _LoginPageState extends State<LoginPage> {
   String error = '';
   final AuthService _auth = AuthService();
   GlobalKey<FormState> _globalKey = GlobalKey<FormState>();
+  bool _btnEnabled = false;
 
 
   @override
   Widget build(BuildContext context) {
-      return Scaffold(
-        backgroundColor: Color(0xff6AB6FF),
-          body: Form(
-            key: _globalKey,
-              child: Center(
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      AspectRatio(
-                        aspectRatio: 50/30,
-                          child: Image.asset('images/logo.png')
-                      ),
-
-                      SizedBox(height: 110),
-
-                      Container(
-                        padding: EdgeInsets.only(left: 8, bottom: 8, top: 4, right: 8),
-                        decoration: BoxDecoration(
-                          color: Colors.transparent,
-                        ),
-                        child: Center(
-                          child: Column(
-                            children: [
-                              Container(
-                                width: 330,
-                                  padding: EdgeInsets.all(9.0),
-                                  decoration: BoxDecoration(
-                                      border: Border(
-                                          bottom: BorderSide(
-                                            color: Colors.white,
-                                          )
-                                      )
-                                  ),
-                                  child: TextFormField(
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 20,
-                                      ),
-                                      decoration: InputDecoration(
-                                        border: InputBorder.none,
-                                        hintStyle: TextStyle(color: Colors.white),
-                                        hintText: 'Email',
-                                      ),
-                                      controller: email,
-                                      validator: (email) {
-                                        if (email.isEmpty) {
-                                          return "Email can't be empty";
-                                        } else {
-                                          return null;
-                                        }
-                                      }
-                                      )
-                                ),
-                              Container(
-                                width: 330,
-                                padding: EdgeInsets.all(9.0),
-                                decoration: BoxDecoration(
-                                    border: Border(
-                                        bottom: BorderSide(
-                                          color: Colors.white,
-                                        )
-                                    )
-                                ),
-                                child: TextFormField(
-                                    obscureText: true,
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 20,
-                                    ),
-                                    decoration: InputDecoration(
-                                      border: InputBorder.none,
-                                      hintStyle: TextStyle(color: Colors.white),
-                                      hintText: 'Password',
-                                    ),
-                                    controller: password,
-                                    validator: (password) {
-                                      if (password.length < 6) {
-                                        return "Password must be 6 or more characters long.";
-                                      } else {
-                                        return null;
-                                      }
-                                    }
-                                ),
-                              ),
-                            ],
+    return Scaffold(
+      backgroundColor: Color(0xff6AB6FF),
+      body: Form(
+        key: _globalKey,
+        child: Center(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Container(
+                    padding: EdgeInsets.only(left: 8, bottom: 8, top: 4, right: 8),
+                    decoration: BoxDecoration(
+                      color: Colors.transparent,
+                    ),
+                    child: Center(
+                      child: Column(
+                        children: [
+                          Container(
+                            width: 800,
+                            child: Image.asset('images/logo.png'),
                           ),
-                        ),
+                          SizedBox(height: 80),
+                          Container(
+                              width: 330,
+                              padding: EdgeInsets.all(7),
+                              decoration: BoxDecoration(
+                                  border: Border(
+                                      bottom: BorderSide(
+                                        color: Colors.white,
+                                      )
+                                  )
+                              ),
+                              child: TextFormField(
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 17,
+                                  ),
+                                  decoration: InputDecoration(
+                                    border: InputBorder.none,
+                                    hintStyle: TextStyle(color: Colors.white),
+                                    hintText: 'Email',
+                                  ),
+                                  controller: email,
+                                  autovalidate: _btnEnabled,
+                                  validator: (String email) {
+                                    if (email.isEmpty) {
+                                      return "Email can't be empty";
+                                    } else {
+                                      return null;
+                                    }
+                                  }
+                              )
+                          ),
+                          Container(
+                            width: 330,
+                            padding: EdgeInsets.all(9.0),
+                            decoration: BoxDecoration(
+                                border: Border(
+                                    bottom: BorderSide(
+                                      color: Colors.white,
+                                    )
+                                )
+                            ),
+                            child: TextFormField(
+                                obscureText: true,
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 17,
+                                ),
+                                decoration: InputDecoration(
+                                  border: InputBorder.none,
+                                  hintStyle: TextStyle(color: Colors.white),
+                                  hintText: 'Password',
+                                ),
+                                controller: password,
+                                autovalidate: _btnEnabled,
+                                validator: (password) {
+                                  if (password.length < 6) {
+                                    return "Password must be 6 or more characters long.";
+                                  } else {
+                                    return null;
+                                  }
+                                }
+                            ),
+                          ),
+                        ],
                       ),
+                    ),
+                  ),
 
 
-                      SizedBox(height: 20),
+                  SizedBox(height: 50),
 
-                      Center(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            ButtonTheme(
-                              height: 50,
-                              buttonColor: Colors.grey,
-                              child: RaisedButton(
-                                    child: Text('Login'),
-                                    onPressed: () async {
-                                      if(_globalKey.currentState.validate()){
-                                      dynamic result = await _auth.signInWithEmailandPassword(email.toString().trim(), password.toString().trim());
-                                      if(result == null){
-                                      setState(() => error = 'Could not sign in with those credentials');
-                                      }
-                                      }
+                  Center(
+                    child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Material(
+                            borderRadius: BorderRadius.circular(30),
+                            elevation: 6.0,
+                            color: Colors.white54,
+                            child: MaterialButton(
+                              minWidth: 200,
+                                height: 45,
+                                textColor: Colors.white,
+                                padding: EdgeInsets.all(10),
+                                child: Text('Login'),
+                                onPressed: () async {
+                                  if(_globalKey.currentState.validate()) {
+                                    dynamic result = await _auth.signInWithEmailandPassword(email.text.toString().trim(), password.text.toString().trim());
+                                    if(result != null){
                                       Navigator.push(
                                           context,
                                           MaterialPageRoute(builder: (context) => HomePage()));
                                     }
-                                  ),
+                                  }
+                                }
                             ),
-                           
+                          ),
 
-                              SizedBox(width: 20),
 
-                              RaisedButton(
-                                child: Text('Register'),
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(builder: (context) => RegisterPage()),
-                                  );
-                                },
-                              )
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: <Widget>[
+                              Container(
+                                color: Colors.transparent,
+                                width: 175,
+                                height: 175,
+                                child: FittedBox(child: Text(
+                                    "Don't have an account?",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                ),), fit: BoxFit.contain),
+                              ),
+                              SizedBox(width: 10),
+                              Container(
+                                color: Colors.transparent,
+                                width: 60,
+                                height: 60,
+                                child: FittedBox(
+                                  fit: BoxFit.contain,
+                                  child: InkWell(child: Text("Register"), onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(builder: (context) => RegisterPage()));
+                                  },),
+                                ),
+                              ),
                             ],
                           ),
-                      ),
                         ]
-                      ),
-                ),
-                ),
+                    ),
+                  )
+                ],
               ),
-            );
+            ),
+        ),
+      ),
+    );
   }
 }

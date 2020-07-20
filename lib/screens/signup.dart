@@ -28,7 +28,7 @@ class _RegisterPageState extends State<RegisterPage> {
           child: Center(
             child: Column(
               children: [
-                Image.asset('images/logozk.png'),
+                Image.asset('images/logo.png'),
 
                 SizedBox(height:20),
 
