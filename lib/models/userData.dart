@@ -26,8 +26,9 @@ class PrivateInfo{
   String email;
   List<String> friends;
   Map<String, dynamic> recommendedRecipes;
+  List<String> liked;
 
-  PrivateInfo({this.email, this.friends, this.recommendedRecipes});
+  PrivateInfo({this.email, this.friends, this.recommendedRecipes, this.liked});
 
   // Get data from the snapshot
   factory PrivateInfo.fromFirestore(DocumentSnapshot doc){
@@ -35,7 +36,8 @@ class PrivateInfo{
     return PrivateInfo(
       email: data['email'] ?? '',
       friends: List.from(data['friends']) ?? [],
-      recommendedRecipes: Map.from(data['recommendedRecipes'])  ?? Map()
+      recommendedRecipes: Map.from(data['recommendedRecipes'])  ?? Map(),
+      liked: List.from(data['liked']) ?? []
     );
   }
 }

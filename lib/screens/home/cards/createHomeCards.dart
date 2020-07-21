@@ -35,7 +35,7 @@ class _CreateHomeCardsState extends State<CreateHomeCards> {
                     physics: NeverScrollableScrollPhysics(),
                     itemBuilder: (BuildContext context, int recipeIndex) {
                       return StreamBuilder(
-                        stream: DatabaseService().recipe(map[key][recipeIndex]),
+                        stream: DatabaseService().recipe(map[key][recipeIndex], key),
                         builder: (context, AsyncSnapshot<Recipe> recipeDataSnap) {
                           if(recipeDataSnap.data == null) return CircularProgressIndicator();
                           return StreamBuilder(
@@ -56,6 +56,7 @@ class _CreateHomeCardsState extends State<CreateHomeCards> {
                                       detailedSummary: recipeDataSnap.data.detailedSummary,
                                       likes: recipeDataSnap.data.likes,
                                       dislikes: recipeDataSnap.data.dislikes,
+                                      isLiked: userDataSnap.data.private.liked.contains(recipeDataSnap.data.recipeID),
                                     )
                                 ),);
                             },

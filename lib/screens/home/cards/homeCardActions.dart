@@ -7,10 +7,12 @@ class HomeCardActions extends StatefulWidget {
 
   final int likes;
   final int dislikes;
+  final bool isLiked;
 
   HomeCardActions({
     this.likes,
-    this.dislikes
+    this.dislikes,
+    this.isLiked,
   });
 }
 
@@ -22,6 +24,11 @@ class _HomeCardActionsState extends State<HomeCardActions> {
 
   @override
   Widget build(BuildContext context) {
+
+    if (this.widget.isLiked) {
+      favoriteIcon = favoriteSelected;
+    }
+
     return Container(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,

@@ -34,7 +34,7 @@ class DatabaseService {
   }
 
   // Gets the recipes
-  Stream<Recipe> recipe(DocumentReference doc){
-    return doc.snapshots().map((event) => Recipe.fromFirestore(event));
+  Stream<Recipe> recipe(DocumentReference doc, String key){
+    return doc.snapshots().map((event) => Recipe.fromFirestore(event, key));
   }
 }

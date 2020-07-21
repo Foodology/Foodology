@@ -9,11 +9,12 @@ class Recipe {
   String title;
   int likes;
   int dislikes;
+  String recipeID;
 
-  Recipe({this.detailedSummary, this.images, this.recipeRating, this.summary, this.title, this.likes, this.dislikes});
+  Recipe({this.detailedSummary, this.images, this.recipeRating, this.summary, this.title, this.likes, this.dislikes, this.recipeID});
 
   // Updates the fields of Recipe with a document snapshot from firebase
-  factory Recipe.fromFirestore(DocumentSnapshot doc){
+  factory Recipe.fromFirestore(DocumentSnapshot doc, String key){
     Map data = doc.data ?? {};
     return Recipe(
       detailedSummary: data['detailedSummary'] ?? '',
@@ -23,6 +24,7 @@ class Recipe {
       title: data['title'] ?? '',
       likes: data['likes'] ?? 0,
       dislikes: data['dislikes'] ?? 0,
+      recipeID: key + '-' + doc.documentID ?? "",
     );
   }
 }

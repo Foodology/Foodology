@@ -16,6 +16,7 @@ class HomeCard extends StatefulWidget {
   final String detailedSummary;
   final int likes;
   final int dislikes;
+  final bool isLiked;
 
   HomeCard({
     this.author,
@@ -27,7 +28,8 @@ class HomeCard extends StatefulWidget {
     this.summary,
     this.detailedSummary,
     this.likes,
-    this.dislikes
+    this.dislikes,
+    this.isLiked
   });
 }
 
@@ -81,6 +83,7 @@ class _HomeCardState extends State<HomeCard> {
             HomeCardActions(
               likes: this.widget.likes,
               dislikes: this.widget.dislikes,
+              isLiked: this.widget.isLiked
             ),
             SizedBox(height: 10.0,),
           ],
